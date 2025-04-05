@@ -1,0 +1,48 @@
+<conteúdo do arquivo>
+
+
+Schema:
+
+---
+name: empresa_dimension
+version: 1
+description: >-
+    Dados para abastecer a dimensão de empresas e associar as transações às entidades organizacionais
+
+models:
+    empresa_dim:
+        columns:
+            - name: 'id'
+              description: Código de identificação da empresa
+              tests:
+                  - not_null
+              meta:
+                  unique: id
+                  label: "Data Lake"
+                  
+            - name: 'nome'
+              description: Nome completo da empresa (ex. Zappi)
+              tests:
+                    - accepted_values
+                values:
+                    - Zappi
+                    
+---
+name: geo_dimension
+version: 1
+description: >-
+    Dados de endereço de empresas e as associar aos registros do Data Lake
+models:
+    geo_dim:
+        columns:
+            - name: 'id'
+              description: Código de identificação da empresa (ex. 153)
+              
+            - name: 'nome'
+                description: Nome completo do estado/pais
+                
+            - name: 'regiao'
+                description: Nome da região
+
+            - name: 'distrito'
+              description: "Nome do distrito, caso o país for Brasil"

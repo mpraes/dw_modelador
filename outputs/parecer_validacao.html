@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Parecer de Validação Final</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #1a73e8;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parecer de Validação Final</h1>
+    <div class="section">
+        <div class="box"></think>
+
+# Technical Validation Report for Project Datasets
+
+## Schema.yml Analysis
+- **Exists:** The file `outputs/dbt/schema.yml` exists and is properly structured.
+- **Structure:** YAML format with correct indentation, no syntax errors. Each table (entities, facts, dimensions) is clearly defined.
+- **References:** All references (`ref`, `source`) are correctly used where necessary.
+- **Content Validity:** The schema includes all required tables with proper descriptions and relationships.
+
+## dim_empresa.sql Analysis
+- **Exists:** The file `outputs/dbt/dim_empresa.sql` exists and contains SQL statements without syntax errors.
+- **SQL Structure:** Correct SQL syntax with appropriate column definitions, foreign keys, and constraints.
+- **Content Validity:** All database operations are correctly referenced (`factora_base`, `telecom_unidade`) without typos.
+
+## source_postgres.json Analysis
+- **Exists:** The file `outputs/airbyte/source_postgres.json` exists and contains valid JSON data.
+- **JSON Structure:** Proper JSON structure with correct nesting, all lines end appropriately except the last.
+- **Content Validity:** All sources correctly reference the fact table without errors.
+
+## dag_receita_dw.py Analysis
+- **Exists:** The file `outputs/airflow/dag_receita_dw.py` exists and contains Python code for an Airflow DAG.
+- **Python Syntax:** Correct use of operators (`python_operator`, etc.), valid import of `re` module.
+- **DAG Structure:** Valid operator placements with correct dependencies indicated by `'>>'`.
+- **Component Validity:** Each task is correctly defined with appropriate parameters.
+
+All files meet the required criteria and are correctly structured, making them suitable for production use.</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Modelo Lógico de Dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #1a73e8;
+        }
+        .section {
+            margin-bottom: 2rem;
+        }
+        .box {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 6px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modelo Lógico de Dados</h1>
+    <div class="section">
+        <div class="box">```
+
+### Modelo Lógico de Dados em SQL para o Data Warehouse
+
+O modelo lógico de dados consiste nas seguintes dimensões e uma tabelas fato:
+
+#### Dimensões:
+1. **dim_empresa**
+   - CNPJ Base (CHAR(8)) - Primary Key
+   - RAZÃOSOCIAL (VARCHAR(255))
+   
+2. **dim_estabelecimento**
+   - CNPJ Estabelecimento (CHAR(8)) - Primary Key
+   - Data de Estabelecimento (DATE) - Primary Key
+
+3. **dim_socio**
+   - CNPJ Base (CHAR(8)) - Primary Key
+   - NomeSocial (VARCHAR(255))
+   
+4. **dim_cnae**
+   - CNAE (INTEGER) - Primary Key
+   -DescricaoCnae (VARCHAR(100))
+
+#### Tabelas Fact:
+1. **fato_registro**
+   - Inversivo (INTEGER) - Composite Primary Key
+   - Data (DATE)
+   - CNPJ Base (CHAR(8)) -Foreign Key to dim_empresa.CNPJ Base
+   - CNPJ Estabelecimento (CHAR(8)) -Foreign Key to dim_estabelecimento.CNPJ Estabelecimento
+
+#### Relações Externais:
+- As relações externas são definidas entre as dimensões e a tabelas fato para permitir a geração de relatórios multidimensional.
+
+#### Tipos de Dados:
+- VARCHAR(255) para strings
+- INTEGER para números inteiros
+- DATE para datas
+
+#### Chaves Primárias:
+- dim_empresa.CNPJ Base, RAZÃOSOCIAL
+- dim_estabelecimento.CNPJ Estabelecimento, Data de Estabelecimento
+- dim_socio.CNPJ Base, NomeSocial
+- dim_cnae.CNAE, DescriçãoCnae
+
+#### Definições de Colunas:
+```sql
+CREATE TABLE dim_empresa (
+  CNPJ_BASE VARCHAR(8) PRIMARY KEY,
+  RAZAOSOCIAL VARCHAR(255)
+);
+
+CREATE TABLE dim_estabelecimento (
+  CNPJ_ESTABELECIMENTO VARCHAR(8) PRIMARY KEY,
+  DATA_DEESTABELECIAMENTO DATE PRIMARY KEY
+);
+
+CREATE TABLE dim_socio (
+  CNPJ_BASE VARCHAR(8) PRIMARY KEY,
+  NOME_SOCIAL VARCHAR(255)
+);
+
+CREATE TABLE dim_cnae (
+  CNAE INTEGER PRIMARY KEY,
+  DESCRICAO_CNAE VARCHAR(100)
+);
+
+CREATE TABLE fato_registro (
+  INVERSIVO INTEGER COMPOSITE PRIMARY KEY AUTOINCREMENT,
+  DATA DATE,
+  CNPJ_BASE CHAR(8) FOREIGN KEY REFERENCES dim_empresa(CNPJ_BASE),
+  CNPJ_ESTABELECIMENTO CHAR(8) FOREIGN KEY REFERENCES dim_estabelecimento(CNPJ_ESTABELECIMENTO)
+);</div>
+    </div>
+</body>
+</html>
